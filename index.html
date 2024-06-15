@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<h2> Bienvenue sur Qr De Nganos </h2>
+<meta charset="UTF-8">
+<title>Connexion au Serveur</title>
+<h3>Bienvenue sur notre site de génération de codes QR et de codes-barres ! Notre plateforme vous permet de créer facilement des codes QR et des codes-barres à partir du texte que vous saisissez. Pour garantir la sécurité de vos données, une connexion chiffrée via TCP et SSH est établie avant toute génération. Utilisez les paramètres par défaut ou choisissez les vôtres pour une personnalisation complète.</h3>
+<script>
+// Fonction pour simuler une connexion au serveur
+function connectToServer(data, callback) {
+    // Ici, vous mettriez votre logique de connexion au serveur
+    // Pour cet exemple, nous allons simuler une réponse réussie après un délai
+    setTimeout(() => {
+        const success = Math.random() > 0.5; // Simule une chance de succès de 50%
+        callback(success);
+    }, 2000);
+}
+
+// Fonction pour mettre à jour le statut de la connexion et rediriger si nécessaire
+function updateConnectionStatus(status, success) {
+    const statusElement = document.getElementById('connectionStatus');
+    statusElement.textContent = status;
+    if (success) {
+        window.location.href = 'suite.html'; // Remplacez par le chemin de votre fichier
+    }
+}
+</script>
+</head>
+<body>
+
+<h2>Connexion au Serveur</h2>
+
+<!-- Formulaire pour la saisie des paramètres de connexion -->
+<form id="connectionForm">
+    <label for="ssh">SSH:</label>
+    <input type="text" id="ssh" name="ssh" placeholder='auth.mtn.cg par defaut'><br><br>
+    <label for="tcp">TCP:</label>
+    <input type="text" id="tcp" name="tcp" placeholder='auth.mtn.cg/code_validate par defaut'><br><br>
+    <!-- Ajoutez d'autres champs de paramètres de connexion si nécessaire -->
+    <button type="button" id="connectButton">Connecter</button>
+</form>
+
+<!-- Élément pour afficher le statut de la connexion -->
+<p id="connectionStatus"></p>
+
+<script>
+// Code JavaScript pour gérer la connexion
+document.getElementById('connectButton').addEventListener('click', function() {
+    const ssh = document.getElementById('ssh').value;
+    const tcp = document.getElementById('tcp').value;
+    // Récupérez d'autres valeurs de paramètres si nécessaire
+
+    // Affiche 'En cours de chargement...' pendant la tentative de connexion
+    updateConnectionStatus('Connexion...', false);
+
+    // Simule la connexion au serveur avec les données saisies
+    connectToServer({ ssh, tcp }, function(success) {
+        if (success) {
+            updateConnectionStatus('Connecté', true);
+        } else {
+            updateConnectionStatus('Échec de la connexion', false);
+        }
+    });
+});
+// Fonction pour enregistrer les données de connexion dans le stockage local
+function saveConnectionData(ssh, tcp) {
+    localStorage.setItem('ssh', ssh);
+    localStorage.setItem('tcp', tcp);
+}
+
+// Fonction pour charger les données de connexion depuis le stockage local
+function loadConnectionData() {
+    const ssh = localStorage.getItem('ssh');
+    const tcp = localStorage.getItem('tcp');
+    return { ssh, tcp };
+}
+
+// Fonction pour initialiser les options de connexion
+function initializeConnectionOptions() {
+    // Options prédéfinies
+    const defaultOptions = {
+        ssh: ['auth.mtn.cg/code_validate', 'autre_ssh1', 'autre_ssh2'],
+        tcp: ['auth.mtn.cg', 'autre_tcp1', 'autre_tcp2']
+    };
+
+    // Enregistrez les options prédéfinies dans le stockage local pour une utilisation ultérieure
+    saveConnectionData(JSON.stringify(defaultOptions.ssh), JSON.stringify(defaultOptions.tcp));
+}
+
+// Appel de la fonction d'initialisation au chargement de la page
+initializeConnectionOptions();
+
+// Fonction pour mettre à jour les données de connexion avec celles fournies par l'utilisateur
+function updateConnectionOptions(sshInput, tcpInput) {
+    // Chargez les options actuelles depuis le stockage local
+    let { ssh, tcp } = loadConnectionData();
+    ssh = JSON.parse(ssh);
+    tcp = JSON.parse(tcp);
+
+    // Ajoutez les nouvelles options si elles ne sont pas déjà présentes
+    if (!ssh.includes(sshInput)) {
+        ssh.push(sshInput);
+    }
+    if (!tcp.includes(tcpInput)) {
+        tcp.push(tcpInput);
+    }
+
+    // Enregistrez les nouvelles options dans le stockage local
+    saveConnectionData(JSON.stringify(ssh), JSON.stringify(tcp));
+}
+
+</script>
+<h5>Notre mission est de fournir un service fiable et sécurisé pour la génération de codes QR et de codes-barres. Nous utilisons des technologies de chiffrement avancées pour protéger vos informations et assurer que vos codes sont générés avec la plus haute qualité possible. Que vous ayez besoin d’un code QR pour votre entreprise ou d’un code-barres pour un produit, notre site est la solution idéale.
+
+Pour commencer, connectez-vous en utilisant les paramètres TCP (auth.mtn.cg) et SSH (auth.mtn.cg/code_validate) par défaut ou entrez les vôtres. Une fois connecté, vous serez redirigé vers notre outil de génération où vous pourrez créer vos propres codes QR et codes-barres en toute sécurité.
+
+Nous espérons que vous trouverez notre service utile et facile à utiliser. Si vous avez des questions ou des suggestions, n’hésitez pas à nous contacter.</h5>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html><head>
+    <title><h2> Bienvenue sur Qr De Nganos </h2></title>
+</head>
+<body>
+
+    <h1>Générateur de code QR</h1>
+    <form id="qr-form">
+        <label for="qr-input">Entrez votre texte:</label><br>
+        <input type="text" id="qr-input" name="qr-input"><br>
+        <input type="button" value="Générer QR" onclick="generateQR()">
+    </form>
+    <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=%20%20%20vv" alt="Votre code QR sera affiché ici">
+
+    <h1>Générateur de code à barres</h1>
+    <form id="barcode-form">
+        <label for="barcode-input">Entrez votre texte:</label><br>
+        <input type="text" id="barcode-input" name="barcode-input"><br>
+        <input type="button" value="Générer code à barres" onclick="generateBarcode()">
+    </form>
+    <img id="barcode-image" src="https://barcode.tec-it.com/barcode.ashx?data=https%3A%2F%2Fwww.bing.com%2Fchat%3Fform%3DNTPCHB&amp;code=Code128&amp;multiplebarcodes=false&amp;translate-esc=false&amp;unit=Fit&amp;dpi=96&amp;imagetype=Gif&amp;rotation=0&amp;color=%23000000&amp;bgcolor=%23ffffff&amp;qunit=Mm&amp;quiet=0" alt="Votre code à barres sera affiché ici">
+
+    <script>
+        function generateQR() {
+            var qrInput = document.getElementById('qr-input').value;
+            var qrImage = document.getElementById('qr-image');
+            qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrInput);
+        }
+
+        function generateBarcode() {
+            var barcodeInput = document.getElementById('barcode-input').value;
+            var barcodeImage = document.getElementById('barcode-image');
+            barcodeImage.src = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(barcodeInput) + '&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0';
+        }
+
+    </script>
+
+
+                        <figure>
+                                                    <img src="https://url-r.fr/static/images/landing.png" alt="Créer URL Courte, Raccourcisseur de liens" class="img-fluid mw-lg-120 rounded-top zindex-100">
+                                                </figure>
+           </body></html>
