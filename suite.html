@@ -9,7 +9,7 @@
         <input type="text" id="qr-input" name="qr-input"><br>
         <input type="button" value="Générer QR" onclick="generateQR()">
     </form>
-    <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=%20%20%20vv" alt="Votre code QR sera affiché ici">
+    <img id="qr-image" alt="Votre code QR sera affiché ici">
 
     <h1>Générateur de code à barres</h1>
     <form id="barcode-form">
@@ -17,7 +17,7 @@
         <input type="text" id="barcode-input" name="barcode-input"><br>
         <input type="button" value="Générer code à barres" onclick="generateBarcode()">
     </form>
-    <img id="barcode-image" src="https://barcode.tec-it.com/barcode.ashx?data=https%3A%2F%2Fwww.bing.com%2Fchat%3Fform%3DNTPCHB&amp;code=Code128&amp;multiplebarcodes=false&amp;translate-esc=false&amp;unit=Fit&amp;dpi=96&amp;imagetype=Gif&amp;rotation=0&amp;color=%23000000&amp;bgcolor=%23ffffff&amp;qunit=Mm&amp;quiet=0" alt="Votre code à barres sera affiché ici">
+    <img id="barcode-image" alt="Votre code à barres sera affiché ici">
 
     <script>
         function generateQR() {
