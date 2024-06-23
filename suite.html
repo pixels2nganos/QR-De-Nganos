@@ -1,8 +1,10 @@
+
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+    <script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Csib2oIPJE2-adlLb0vwUT1IAj3DIJJuiC7G1pO9Y8LyAeIB63qSCvtGYS_H9c6eO1NGVQqeBHvgbdXl5H6ukA" charset="UTF-8"></script><style>
         /* Styles pour le fond animé */
         body {
             background-color: #f0f0f0; /* Couleur de fond */
@@ -62,53 +64,28 @@
 
 
 
-    <style>
-        /* Styles pour le bouton */
-        .animated-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #7b38d8;
-            border-radius: 10px;
-            border: 4px double #cccccc;
-            color: #eeeeee;
-            text-align: center;
-            font-size: 18px;
-            padding: 10px;
-            width: 200px; /* Ajustez la largeur selon vos besoins */
-            cursor: pointer;
-            transition: all 2s;
-        }
-
-        .animated-button:hover {
-            background-color: green;
-        }
-
-        /* Image du bouton */
-        .button-image {
-            width: 200px; /* Ajustez la taille de l'image */
-            height: 140px; /* Ajustez la taille de l'image */
-            margin-right: 5px;
-        }
-    </style>
 
 <body>
+<div class='pub'>
     <!-- Bouton animé avec image -->
-    <li href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr" >
-        <div class="animated-button">
-            <img class="button-image" src="crunchyroll-premium.png" alt="Image du bouton">
+    <a href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr" >
+        
+            <img class="button-image" src="crunchyroll-premium.png" alt="Image du bouton" width='60' height='35' right='40'>
             Obtenir Un Compte Crunchyroll Premium
-        </div>
-    </a>
+ </a>
+
+     
+  
 
 
     <!-- Deuxième bouton animé avec image -->
     <a href="https://chat.whatsapp.com/KkaY1SZEhqz1EO9MMOYzOy" >
         <div class="animated-button-second">
-            <img class="button-image-second" src="netflix-premium.jpg" alt="Image du deuxième bouton">
+            <img class="button-image-second" src="netflix-premium.jpg" alt="Image du deuxième bouton" width='60' height='35' right='40'>
             Obtenir Un Compte Netflix Premium
-        </div>
+       
     </a>
+</div>
 
 
     <meta charset="UTF-8">
@@ -153,7 +130,7 @@
     <!-- Bouton "Nous Contacter" avec image -->
     <a href="https://api.whatsapp.com/send?phone=+242067712688&text=Salut%20j'ai%20téléchargé%20QR%20De%20Nganos,%20je%20souhaiterais%20avoir%20des%20infos%20dessus.%20Merci." target="_blank">
         <div class="contact-button">
-            <img class="whatsapp-icon" src="OIP.jpg" alt="Icône WhatsApp" width="100" height="90">
+            <img class="whatsapp-icon" src="OIP.jpg" alt="Icône WhatsApp" width="50" height="45">
             Nous Contacter
         </div>
     </a>
@@ -164,64 +141,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer une annonce</title>
-    <style>
-        /* Styles pour le bouton */
-        .annonce-button {
-            background-color: #0074c2;
-            color: #ffffff;
-            border: 2px solid #e0e0e0; /* Bordure grise légère ajustable */
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            position: fixed;
-            bottom: 40px; /* Position en bas à droite de 40px */
-            right: 40px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
-        }
-
-        /* Style pour l'image */
-        .annonce-image {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Styles pour le champ d'upload d'images */
-        .upload-input {
-            display: none;
-        }
-    </style>
+    <title>Créer une annonce avec images</title>
 </head>
 <body>
-    <!-- Bouton pour ouvrir le champ d'upload -->
-    <label for="upload" class="annonce-button">Creer une annonce</label>
-    <input type="file" id="upload" class="upload-input" multiple accept="image/*" onchange="envoyerWhatsApp(event)">
 
-    <!-- Conteneur pour afficher les images sélectionnées -->
-    <div id="images-container"></div>
+<!-- Bouton pour choisir des images -->
+<input type="file" id="fileInput" name="files[]" accept="image/*" multiple style="display: none;">
+<button onclick="selectImages()">Créer une annonce avec images</button>
 
-    <script>
-        // Fonction pour afficher les images sélectionnées et ouvrir WhatsApp
-        function envoyerWhatsApp(event) {
-            const imagesContainer = document.getElementById("images-container");
-            imagesContainer.innerHTML = ""; // Réinitialiser le contenu
+<script>
+    function selectImages() {
+        document.getElementById('fileInput').click();
+    }
 
-            const files = event.target.files;
-            for (const file of files) {
-                const img = document.createElement("img");
-                img.src = URL.createObjectURL(file);
-                img.classList.add("annonce-image");
-                imagesContainer.appendChild(img);
+    // Écouteur d'événement sur le changement de fichier
+    document.getElementById('fileInput').addEventListener('change', function() {
+        const files = this.files;
+        if (files.length > 0) {
+            let url = 'https://api.whatsapp.com/send?phone=+242067712688';
+            let message = encodeURIComponent('Je souhaite créer une annonce.');
+
+            // Ajouter chaque image comme un lien dans le message WhatsApp
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    let imageBase64 = e.target.result;
+                    url += '&text=' + encodeURIComponent(message + '\n' + imageBase64);
+                    if (i === files.length - 1) {
+                        window.location.href = url;
+                    }
+                };
             }
-
-            const message = encodeURIComponent("Je souhaite créer une annonce. Merci !");
-            const numeroWhatsApp = "+242067712688"; // Remplacez par le numéro de téléphone WhatsApp
-
-            // Ouvrir WhatsApp avec le message pré-écrit
-            window.location.href = `whatsapp://send?phone=${numeroWhatsApp}&text=${message}`;
         }
-    </script>
+    });
+</script>
+
 </body>
 </html>
 
