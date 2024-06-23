@@ -1,258 +1,66 @@
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Styles pour le fond animé */
-        body {
-            background-color: #f0f0f0; /* Couleur de fond */
-            background-image: linear-gradient(45deg, #7b38d8, #00ff00); /* Dégradé de couleurs */
-            animation: gradientAnimation 10s infinite alternate; /* Animation du dégradé */
-        }
-
-        /* Animation du dégradé */
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
-        }
-
-        /* Styles pour le texte */
-        h1 {
-            color: #ffffff; /* Couleur du texte */
-            text-align: margin;
-            font-size: 36px;
-            margin-top: 100px; /* Ajustez l'espace par rapport au haut */
-        }
-    </style>
-
-    <h1>Générateur de code QR</h1>
-    <form id="qr-form">
-        <label for="qr-input">Entrez votre texte:</label><br>
-        <input type="text" id="qr-input" name="qr-input"><br>
-        <input type="button" value="Générer QR" onclick="generateQR()">
-    </form>
-    <img id="qr-image" src="" alt="Votre code QR sera affiché ici">
-
-    <h1>Générateur de code à barres</h1>
-    <form id="barcode-form">
-        <label for="barcode-input">Entrez votre texte:</label><br>
-        <input type="text" id="barcode-input" name="barcode-input"><br>
-        <input type="button" value="Générer code à barres" onclick="generateBarcode()">
-    </form>
-    <img id="barcode-image"  alt="Votre code à barres sera affiché ici">
-
-    <script>
-        function generateQR() {
-            var qrInput = document.getElementById('qr-input').value;
-            var qrImage = document.getElementById('qr-image');
-            qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrInput);
-        }
-
-        function generateBarcode() {
-            var barcodeInput = document.getElementById('barcode-input').value;
-            var barcodeImage = document.getElementById('barcode-image');
-            barcodeImage.src = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(barcodeInput) + '&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0';
-        }
-
-    </script>
-
-
-
-    <style>
-        /* Styles pour le bouton */
-        .animated-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #7b38d8;
-            border-radius: 10px;
-            border: 4px double #cccccc;
-            color: #eeeeee;
-            text-align: center;
-            font-size: 18px;
-            padding: 10px;
-            width: 200px; /* Ajustez la largeur selon vos besoins */
-            cursor: pointer;
-            transition: all 2s;
-        }
-
-        .animated-button:hover {
-            background-color: green;
-        }
-
-        /* Image du bouton */
-        .button-image {
-            width: 200px; /* Ajustez la taille de l'image */
-            height: 140px; /* Ajustez la taille de l'image */
-            margin-right: 5px;
-        }
-    </style>
-
-<body>
-    <!-- Bouton animé avec image -->
-    <a href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr" target="_blank">
-        <div class="animated-button">
-            <img class="button-image" src="crunchyroll-premium.png" alt="Image du bouton">
-            Obtenir Un Compte Crunchyroll Premium
-        </div>
-    </a>
-
-    <style>
-        /* Styles pour le deuxième bouton */
-        .animated-button-second {
-            position: fixed;
-            top: 250px; /* Ajustez la position verticale selon vos besoins */
-            right: 20px;
-            background-color: #7b38d8;
-            border-radius: 10px;
-            border: 4px double #cccccc;
-            color: #eeeeee;
-            text-align: center;
-            font-size: 18px;
-            padding: 10px;
-            width: 200px;
-            cursor: pointer;
-            transition: all 2s;
-        }
-
-        .animated-button-second:hover {
-            background-color: green;
-        }
-
-        /* Image du deuxième bouton */
-        .button-image-second {
-            width: 200px; /* Ajustez la taille de l'image */
-            height: 140px; /* Ajustez la taille de l'image */
-            margin-right: 5px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Deuxième bouton animé avec image -->
-    <a href="https://chat.whatsapp.com/KkaY1SZEhqz1EO9MMOYzOy" target="_blank">
-        <div class="animated-button-second">
-            <img class="button-image-second" src="netflix-premium.jpg" alt="Image du deuxième bouton">
-            Obtenir Un Compte Netflix Premium
-        </div>
-    </a>
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Styles pour le bouton WhatsApp */
-        .contact-button {
-            position: fixed;
-            bottom: 0px;
-            left: 40%;
-            transform: translateX(-50%);
-            background-color: #25d366; /* Couleur WhatsApp */
-            border-radius: 20px;
-            color: #ffffff;
-            text-align: center;
-            font-size: 30px; /* Ajustez la taille du texte */
-            padding: 30px 30px; /* Ajustez le padding */
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-
-        }
-
-        .contact-button:hover {
-            background-color: #128c7e; /* Couleur WhatsApp au survol */
-        }
-
-        /* Icône WhatsApp (par exemple, Font Awesome) */
-        .whatsapp-icon {
-            margin-right: 1px;
-        }
-
-        /* Effet de clic */
-        .contact-button:active {
-            transform: scale(0.95);
-        }
-   
-    </style>
-</head>
-<body>
-    <!-- Bouton "Nous Contacter" avec image -->
-    <a href="https://api.whatsapp.com/send?phone=+1234567890&text=Salut%20j'ai%20téléchargé%20QR%20De%20Nganos,%20je%20souhaiterais%20avoir%20des%20infos%20dessus.%20Merci." target="_blank">
-        <div class="contact-button">
-            <img class="whatsapp-icon" src="OIP.jpg" alt="Icône WhatsApp" width="100" height="90">
-            Nous Contacter
-        </div>
-    </a>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer une annonce</title>
+    <title>Connexion sécurisée</title>
     <style>
-        /* Styles pour le bouton */
-        .annonce-button {
+        /* Styles pour le formulaire */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        button {
             background-color: #0074c2;
             color: #ffffff;
-            border: 2px solid #e0e0e0; /* Bordure grise légère ajustable */
+            border: none;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
-            position: fixed;
-            bottom: 40px; /* Position en bas à droite de 40px */
-            right: 40px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
-        }
-
-        /* Style pour l'image */
-        .annonce-image {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Styles pour le champ d'upload d'images */
-        .upload-input {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Bouton pour ouvrir le champ d'upload -->
-    <label for="upload" class="annonce-button">Creer une annonce</label>
-    <input type="file" id="upload" class="upload-input" multiple accept="image/*" onchange="envoyerWhatsApp(event)">
-
-    <!-- Conteneur pour afficher les images sélectionnées -->
-    <div id="images-container"></div>
+    <div class="container">
+        <h1>Bonjour ! Bienvenue sur la page de connexion sécurisée de QR De Nganos.</h1>
+        <p>Utilisez "auth.mtn.cg" comme nom d'hôte et mot de passe.</p>
+        <form id="ssh-form">
+            <label for="hostname">Nom d'hôte :</label>
+            <input type="text" id="hostname" placeholder="auth.mtn.cg" required>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" placeholder="Votre nom d'utilisateur" required>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" placeholder="Votre mot de passe" required>
+            <button type="button" onclick="etablirConnexion()">Se connecter</button>
+        </form>
+        <p id="status"></p>
+    </div>
 
     <script>
-        // Fonction pour afficher les images sélectionnées et ouvrir WhatsApp
-        function envoyerWhatsApp(event) {
-            const imagesContainer = document.getElementById("images-container");
-            imagesContainer.innerHTML = ""; // Réinitialiser le contenu
+        function etablirConnexion() {
+            const hostname = document.getElementById("hostname").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-            const files = event.target.files;
-            for (const file of files) {
-                const img = document.createElement("img");
-                img.src = URL.createObjectURL(file);
-                img.classList.add("annonce-image");
-                imagesContainer.appendChild(img);
-            }
+            // Ici, vous pouvez simuler la connexion SSH (par exemple, en utilisant une API côté serveur)
+            // Si la connexion est réussie, redirigez vers suite.html
+            // Sinon, affichez un message d'échec de connexion avec une tentative de reconnexion automatique
 
-            const message = encodeURIComponent("Je souhaite créer une annonce. Merci !");
-            const numeroWhatsApp = "+242067712688"; // Remplacez par le numéro de téléphone WhatsApp
-
-            // Ouvrir WhatsApp avec le message pré-écrit
-            window.location.href = `whatsapp://send?phone=${numeroWhatsApp}&text=${message}`;
+            // Exemple de redirection (à adapter) :
+            window.location.href = "accueil.html";
         }
     </script>
 </body>
 </html>
-
-
