@@ -1,18 +1,23 @@
 
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils Divers</title>
+
+    <!-- Styles pour le fond animé -->
     <style>
-        /* Styles pour le fond animé */
         body {
             background-color: #f0f0f0; /* Couleur de fond */
             background-image: linear-gradient(45deg, #7b38d8, #00ff00); /* Dégradé de couleurs */
             animation: gradientAnimation 10s infinite alternate; /* Animation du dégradé */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        /* Animation du dégradé */
         @keyframes gradientAnimation {
             0% {
                 background-position: 0% 50%;
@@ -22,117 +27,129 @@
             }
         }
 
-        /* Styles pour le texte */
-        h1 {
-            color: #ffffff; /* Couleur du texte */
-            text-align: margin;
-            font-size: 36px;
-            margin-top: 100px; /* Ajustez l'espace par rapport au haut */
-        }
-    </style>
-
-    <h1>Générateur de code QR</h1>
-    <form id="qr-form">
-        <label for="qr-input">Entrez votre texte:</label><br>
-        <input type="text" id="qr-input" name="qr-input"><br>
-        <input type="button" value="Générer QR" onclick="generateQR()">
-    </form>
-    <img id="qr-image" src="" alt="Votre code QR sera affiché ici">
-
-    <h1>Générateur de code à barres</h1>
-    <form id="barcode-form">
-        <label for="barcode-input">Entrez votre texte:</label><br>
-        <input type="text" id="barcode-input" name="barcode-input"><br>
-        <input type="button" value="Générer code à barres" onclick="generateBarcode()">
-    </form>
-    <img id="barcode-image"  alt="Votre code à barres sera affiché ici">
-
-    <script>
-        function generateQR() {
-            var qrInput = document.getElementById('qr-input').value;
-            var qrImage = document.getElementById('qr-image');
-            qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrInput);
-        }
-
-        function generateBarcode() {
-            var barcodeInput = document.getElementById('barcode-input').value;
-            var barcodeImage = document.getElementById('barcode-image');
-            barcodeImage.src = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(barcodeInput) + '&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0';
-        }
-
-    </script>
-
-
-
-
-<body>
-<div class='pub'>
-    <!-- Bouton animé avec image -->
-    <a href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr" >
-        
-            <img class="button-image" src="crunchyroll-premium.png" alt="Image du bouton" width='60' height='35' right='40'>
-            Obtenir Un Compte Crunchyroll Premium
- </a>
-
-     
-  
-
-
-    <!-- Deuxième bouton animé avec image -->
-    <a href="https://chat.whatsapp.com/KkaY1SZEhqz1EO9MMOYzOy" >
-        <div class="animated-button-second">
-            <img class="button-image-second" src="netflix-premium.jpg" alt="Image du deuxième bouton" width='60' height='35' right='40'>
-            Obtenir Un Compte Netflix Premium
-       
-    </a>
-</div>
-
-
-    <style>
-    
-        /* Styles pour le bouton WhatsApp */
-        .contact-button {
-            position: fixed;
-            bottom: 0px;
-            left: 95%;
-            transform: translateX(-50%);
-            background-color: #25d366; /* Couleur WhatsApp */
-            border-radius: 20px;
-            color: #ffffff;
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            font-size: 10px; /* Ajustez la taille du texte */
-            padding: 30px 30px; /* Ajustez le padding */
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="url"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-
         }
 
-        .contact-button:hover {
-            background-color: #128c7e; /* Couleur WhatsApp au survol */
+        button:hover {
+            background-color: #218838;
         }
 
-        /* Icône WhatsApp (par exemple, Font Awesome) */
-        .whatsapp-icon {
-            margin-right: 1px;
+        .result {
+            margin-top: 20px;
         }
-
-        /* Effet de clic */
-        .contact-button:active {
-            transform: scale(0.95);
-        }
-   
     </style>
 </head>
 <body>
-    <!-- Bouton "Nous Contacter" avec image -->
-    <a href="https://api.whatsapp.com/send?phone=+242067712688&text=Salut%20j'ai%20téléchargé%20QR%20De%20Nganos,%20je%20souhaiterais%20avoir%20des%20infos%20dessus.%20Merci." target="_blank">
-        <div class="contact-button">
-            <img class="whatsapp-icon" src="OIP.jpg" alt="Icône WhatsApp" width="20" height="25">
-            Nous Contacter
+    <!-- Générateur de QR Code -->
+    <div class="container">
+        <h1>Générateur de QR Code</h1>
+        <div class="input-group">
+            <input type="text" id="qrInput" placeholder="Entrez votre texte pour QR Code">
         </div>
-    </a>
+        <button id="generateQRButton">Générer QR Code</button>
+        <div class="result">
+            <img id="qrCodeImage" src="" alt="Votre code QR sera affiché ici">
+        </div>
+    </div>
+
+    <!-- Générateur de Code à Barres -->
+    <div class="container">
+        <h1>Générateur de Code à Barres</h1>
+        <div class="input-group">
+            <input type="text" id="barcodeInput" placeholder="Entrez votre texte pour Code à Barres">
+        </div>
+        <button id="generateBarcodeButton">Générer Code à Barres</button>
+        <div class="result">
+            <img id="barcodeImage" src="" alt="Votre code à barres sera affiché ici">
+        </div>
+    </div>
+
+    <!-- Raccourcisseur de Lien avec TinyURL -->
+    <div class="container">
+        <h1>Raccourcisseur de Lien avec TinyURL</h1>
+        <div class="input-group">
+            <input type="url" id="urlInput" placeholder="Entrez votre URL à raccourcir">
+        </div>
+        <button id="shortenButton">Raccourcir</button>
+        <div class="input-group">
+            <input type="url" id="shortenedUrl" placeholder="Lien raccourci apparaîtra ici" readonly>
+        </div>
+    </div>
+
+    <!-- Boutons animés -->
+    <div class="pub">
+        <!-- Bouton animé avec image Crunchyroll -->
+        <a href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr">
+            <img class="button-image" src="crunchyroll-premium.png" alt="Image du bouton Crunchyroll" width="60" height="35">
+            Obtenir Un Compte Crunchyroll Premium
+        </a>
+
+        <!-- Deuxième bouton animé avec image Netflix -->
+        <a href="https://chat.whatsapp.com/KkaY1SZEhqz1EO9MMOYzOy">
+            <img class="button-image" src="netflix-premium.jpg" alt="Image du bouton Netflix" width="60" height="35">
+            Obtenir Un Compte Netflix Premium
+        </a>
+    </div>
+
+    <!-- Annonce avec images pour WhatsApp -->
+    <input type="file" id="fileInput" name="files[]" accept="image/*" multiple style="display: none;">
+    <button onclick="selectImages()">Créer une annonce avec images</button>
+
+    <script>
+        function selectImages() {
+            document.getElementById('fileInput').click();
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const files = this.files;
+            if (files.length > 0) {
+                let url = 'https://api.whatsapp.com/send?phone=+242067712688';
+                let message = encodeURIComponent('Je souhaite créer une annonce.');
+
+                for (let i = 0; i < files.length; i++) {
+                    let file = files[i];
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function(e) {
+                        let imageBase64 = e.target.result;
+                        url += '&text=' + encodeURIComponent(message + '\n' + imageBase64);
+                        if (i === files.length - 1) {
+                            window.location.href = url;
+                        }
+                    };
+                }
+            }
+        });
+    </script>
 </body>
 </html>
 <!DOCTYPE html>
@@ -140,44 +157,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer une annonce avec images</title>
+    <title>Nous Contacter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Couleur de fond */
+        }
+
+        .contact-button {
+            background-color: #25d366; /* Couleur WhatsApp */
+            border-radius: 20px;
+            color: #ffffff;
+            text-align: center;
+            font-size: 16px; /* Ajustez la taille du texte */
+            padding: 15px 30px; /* Ajustez le padding */
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .contact-button:hover {
+            background-color: #128c7e; /* Couleur WhatsApp au survol */
+        }
+
+        .whatsapp-icon {
+            vertical-align: middle;
+            margin-right: 10px;
+            width: 30px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Bouton pour choisir des images -->
-<input type="file" id="fileInput" name="files[]" accept="image/*" multiple style="display: none;">
-<button onclick="selectImages()">Créer une annonce avec images</button>
-
-<script>
-    function selectImages() {
-        document.getElementById('fileInput').click();
-    }
-
-    // Écouteur d'événement sur le changement de fichier
-    document.getElementById('fileInput').addEventListener('change', function() {
-        const files = this.files;
-        if (files.length > 0) {
-            let url = 'https://api.whatsapp.com/send?phone=+242067712688';
-            let message = encodeURIComponent('Je souhaite créer une annonce.');
-
-            // Ajouter chaque image comme un lien dans le message WhatsApp
-            for (let i = 0; i < files.length; i++) {
-                let file = files[i];
-                let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function(e) {
-                    let imageBase64 = e.target.result;
-                    url += '&text=' + encodeURIComponent(message + '\n' + imageBase64);
-                    if (i === files.length - 1) {
-                        window.location.href = url;
-                    }
-                };
-            }
-        }
-    });
-</script>
+<!-- Bouton "Nous Contacter" avec image -->
+<a href="https://wa.me/+242067712688?text=Bonjour%20j'aimerais%20avoir%20des%20infos%20sur%20QR%20De%20Nganos" target="_blank" class="contact-button">
+    <img class="whatsapp-icon" src="OIP.jpg" alt="Icône WhatsApp">
+    Nous Contacter
+</a>
 
 </body>
 </html>
-
 
