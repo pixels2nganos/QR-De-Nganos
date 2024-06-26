@@ -1,10 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outils Divers</title>
+    <title>Générateur de QR Code, Code à Barres et Raccourcisseur d'URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="url"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container pour le générateur de QR Code -->
+    <div class="container">
+        <h1>Générateur de QR Code</h1>
+        <div class="input-group">
+            <input type="text" id="qrInput" placeholder="Entrez votre texte pour QR Code">
+        </div>
+        <button id="generateQRButton">Générer QR Code</button>
+        <div class="result">
+            <img id="qrCodeImage" src="" alt="Votre code QR sera affiché ici">
+        </div>
+    </div>
+
+    <!-- Container pour le générateur de Code à Barres -->
+    <div class="container">
+        <h1>Générateur de Code à Barres</h1>
+        <div class="input-group">
+            <input type="text" id="barcodeInput" placeholder="Entrez votre texte pour Code à Barres">
+        </div>
+        <button id="generateBarcodeButton">Générer Code à Barres</button>
+        <div class="result">
+            <img id="barcodeImage" src="" alt="Votre code à barres sera affiché ici">
+        </div>
+    </div>
+
+    <!-- Container pour le raccourcisseur de lien avec TinyURL -->
+    <div class="container">
+        <h1>Raccourcisseur de Lien avec TinyURL</h1>
+        <div class="input-group">
+            <input type="url" id="urlInput" placeholder="Entrez votre URL à raccourcir">
+        </div>
+        <button id="shortenButton">Raccourcir</button>
+        <div class="input-group">
+            <input type="url" id="shortenedUrl" placeholder="Lien raccourci apparaîtra ici" readonly>
+        </div>
+    </div>
+
+    <!-- Script JavaScript pour les fonctionnalités -->
+    <script>
+        // Fonction pour générer un QR Code
+        document.getElementById('generateQRButton').addEventListener('click', function() {
+            var qrInput = document.getElementById('qrInput').value;
+            var qrCodeImage = document.getElementById('qrCodeImage');
+            qrCodeImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrInput);
+        });
+
+        // Fonction pour générer un Code à Barres
+        document.getElementById('generateBarcodeButton').addEventListener('click', function() {
+            var barcodeInput = document.getElementById('barcodeInput').value;
+            var barcodeImage = document.getElementById('barcodeImage');
+            barcodeImage.src = 'https://barcode.tec-it.com/barcode.ashx?data=' + encodeURIComponent(barcodeInput) + '&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0';
+        });
+
+        // Fonction pour raccourcir un lien avec TinyURL
+        document.getElementById('shortenButton').addEventListener('click', function() {
+            var urlInput = document.getElementById('urlInput').value;
+            var apiEndpoint = 'https://tinyurl.com/api-create.php?url=' + encodeURIComponent(urlInput);
+            fetch(apiEndpoint)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shortenedUrl').value = data;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicités Défilantes</title>
 
     <!-- Styles pour le fond animé -->
     <style>
@@ -27,180 +142,147 @@
             }
         }
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 20px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        input[type="text"], input[type="url"] {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 10px;
+        .ads-container {
+            position: fixed;
+            right: 10px;
+            top: 50px;
+            height: 150px; /* Hauteur pour afficher trois annonces */
+            overflow: hidden;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
         }
 
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        .ad-item {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            transition: transform 0.5s ease;
         }
 
-        button:hover {
-            background-color: #218838;
+        .ad-item:hover {
+            transform: scale(1.05);
         }
 
-        .result {
-            margin-top: 20px;
+        .ad-item img {
+            width: 100px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .ad-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
         }
     </style>
 </head>
-<body>
-    <!-- Générateur de QR Code -->
-    <div class="container">
-        <h1>Générateur de QR Code</h1>
-        <div class="input-group">
-            <input type="text" id="qrInput" placeholder="Entrez votre texte pour QR Code">
-        </div>
-        <button id="generateQRButton">Générer QR Code</button>
-        <div class="result">
-            <img id="qrCodeImage" src="" alt="Votre code QR sera affiché ici">
-        </div>
-    </div>
-
-    <!-- Générateur de Code à Barres -->
-    <div class="container">
-        <h1>Générateur de Code à Barres</h1>
-        <div class="input-group">
-            <input type="text" id="barcodeInput" placeholder="Entrez votre texte pour Code à Barres">
-        </div>
-        <button id="generateBarcodeButton">Générer Code à Barres</button>
-        <div class="result">
-            <img id="barcodeImage" src="" alt="Votre code à barres sera affiché ici">
-        </div>
-    </div>
-
-    <!-- Raccourcisseur de Lien avec TinyURL -->
-    <div class="container">
-        <h1>Raccourcisseur de Lien avec TinyURL</h1>
-        <div class="input-group">
-            <input type="url" id="urlInput" placeholder="Entrez votre URL à raccourcir">
-        </div>
-        <button id="shortenButton">Raccourcir</button>
-        <div class="input-group">
-            <input type="url" id="shortenedUrl" placeholder="Lien raccourci apparaîtra ici" readonly>
-        </div>
-    </div>
-
-    <!-- Boutons animés -->
-    <div class="pub">
-        <!-- Bouton animé avec image Crunchyroll -->
-        <a href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr">
-            <img class="button-image" src="crunchyroll-premium.png" alt="Image du bouton Crunchyroll" width="60" height="35">
-            Obtenir Un Compte Crunchyroll Premium
-        </a>
-
-        <!-- Deuxième bouton animé avec image Netflix -->
-        <a href="https://chat.whatsapp.com/KkaY1SZEhqz1EO9MMOYzOy">
-            <img class="button-image" src="netflix-premium.jpg" alt="Image du bouton Netflix" width="60" height="35">
-            Obtenir Un Compte Netflix Premium
-        </a>
-    </div>
-
-    <!-- Annonce avec images pour WhatsApp -->
-    <input type="file" id="fileInput" name="files[]" accept="image/*" multiple style="display: none;">
-    <button onclick="selectImages()">Créer une annonce avec images</button>
-
-    <script>
-        function selectImages() {
-            document.getElementById('fileInput').click();
-        }
-
-        document.getElementById('fileInput').addEventListener('change', function() {
-            const files = this.files;
-            if (files.length > 0) {
-                let url = 'https://api.whatsapp.com/send?phone=+242067712688';
-                let message = encodeURIComponent('Je souhaite créer une annonce.');
-
-                for (let i = 0; i < files.length; i++) {
-                    let file = files[i];
-                    let reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = function(e) {
-                        let imageBase64 = e.target.result;
-                        url += '&text=' + encodeURIComponent(message + '\n' + imageBase64);
-                        if (i === files.length - 1) {
-                            window.location.href = url;
-                        }
-                    };
-                }
-            }
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nous Contacter</title>
+    <title>Publicités Défilantes</title>
+
+    <!-- Styles pour le fond animé -->
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
             background-color: #f0f0f0; /* Couleur de fond */
+            background-image: linear-gradient(45deg, #7b38d8, #00ff00); /* Dégradé de couleurs */
+            animation: gradientAnimation 10s infinite alternate; /* Animation du dégradé */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        .contact-button {
-            background-color: #25d366; /* Couleur WhatsApp */
-            border-radius: 20px;
-            color: #ffffff;
-            text-align: center;
-            font-size: 16px; /* Ajustez la taille du texte */
-            padding: 15px 30px; /* Ajustez le padding */
-            cursor: pointer;
-            display: inline-block;
-            text-decoration: none;
-            transition: background-color 0.3s;
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
         }
 
-        .contact-button:hover {
-            background-color: #128c7e; /* Couleur WhatsApp au survol */
+        .ads-container {
+            position: absolute;
+            top: -50px; /* Commence au-dessus de la fenêtre */
+            right: 10px;
+            height: 150px; /* Hauteur pour afficher trois annonces */
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            animation: moveAds 10s linear infinite;
         }
 
-        .whatsapp-icon {
-            vertical-align: middle;
+        .ad-item {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            transition: transform 2s ease;
+        }
+
+        .ad-item:hover {
+            transform: scale(3.05);
+        }
+
+        .ad-item img {
+            width: 100px;
+            height: 50px;
+            object-fit: cover;
             margin-right: 10px;
-            width: 30px;
-            height: auto;
+        }
+
+        .ad-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        @keyframes moveAds {
+            0% {
+                top: -50px; /* Démarre au-dessus de la fenêtre */
+            }
+            100% {
+                top: calc(100% + 50px); /* Va au-delà de la fenêtre */
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Conteneur pour les publicités -->
+    <div class="ads-container">
+        <!-- Première publicité -->
+        <div class="ad-item">
+            <img src="crunchyroll-premium.png" alt="Image publicité 1">
+            <a href="https://chat.whatsapp.com/D8eGSCuGz2R3KZbgwxDSAr" target='blank'>Obtenir Un Compte Crunchyroll Premium</a>
+        </div>
+        
+        <!-- Deuxième publicité -->
+        <div class="ad-item">
+            <img src="netflix-premium.jpg" alt="Image publicité 2">
+            <a href="https://chat.whatsapp.com/KkaY1SZEhqz1EO9MMOYzOy" target='blank'>Obtenir Un Compte Netflix Premium </a>
+        </div>
+        
+        <!-- Troisième publicité -->
+        <div class="ad-item">
+            <img src="OIP.jpg" alt="Image publicité 3">
+            <a href="https://wa.me/+242067712688?text=Bonjour%20j%27aimerais%20avoir%20des%20infos%20sur%20QR%20De%20Nganos">Nous Contacter</a>
+        </div>
+    </div>
 
-<!-- Bouton "Nous Contacter" avec image -->
-<a href="https://wa.me/+242067712688?text=Bonjour%20j'aimerais%20avoir%20des%20infos%20sur%20QR%20De%20Nganos" target="_blank" class="contact-button">
-    <img class="whatsapp-icon" src="OIP.jpg" alt="Icône WhatsApp">
-    Nous Contacter
-</a>
-
+    <!-- Script JavaScript pour les fonctionnalités -->
+    <script>
+        // Code JavaScript peut être ajouté ici pour gérer le comportement interactif des annonces, si nécessaire
+    </script>
 </body>
 </html>
-
